@@ -1,0 +1,15 @@
+[
+    {
+        "nombre": "AA",
+        "apellido": "BB",
+        "fechaIngreso": "Jan 19, 1999, 12:00:00 AM",
+        "fechaSalida": "Jan 19, 2000, 12:00:00 AM",
+        "sexo": "Macho",
+        "ciudad": "Pmamplona",
+        "posicion": "Ingeniero",
+        "salarioBase": 99999,
+        "salarioNeto": 82999.17,
+        "antiguedadLaboral": 9085,
+        "isRotacion": true
+    }
+]
