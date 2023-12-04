@@ -17,31 +17,36 @@ import java.util.Date;
 
 
 public class FileManager {
+	
+	
+	
+	public FileManager(String filepath) {
+		super();
+		this.filepath = filepath;
+	}
+
+
 	private String filepath;
 	
 	public void getData(ArrayList<Prestamo> listaPrestamos) {
 		File file = new File(filepath);
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
+			String prvLine = "";
 			String line = br.readLine();
+			String unformatedLine = prvLine.toLowerCase().replaceAll("\n", ""); //regex para eliminar todos los caracteres especiales
 			while(line !=null) {
-				
-				
-				
-				
-				String unformatedLine = line.toLowerCase().replaceAll("\n", ""); //regex para eliminar todos los caracteres especiales
 				Prestamo prestamo = new Prestamo();
 				switch(unformatedLine) {
 					case "nombre":{
-						line = br.readLine();
-						unformatedLine = line.toLowerCase().replaceAll("\n", "");
-						prestamo.setName(line.replace("\n", ""));
+						String nombre = line.toLowerCase().replaceAll("\n", "");
+						prestamo.setName(nombre);
 						break;
 					}
 					case "autor":{
 						line = br.readLine();
-						unformatedLine = line.toLowerCase().replaceAll("\n", "");
-						prestamo.setAuthor(line.replace("\n", ""));
+						String author = line.toLowerCase().replaceAll("\n", "");
+						prestamo.setAuthor(author);
 						break;
 					}
 					case "fecha de solicitud":{
@@ -69,7 +74,7 @@ public class FileManager {
 						break;
 					}
 					case "estado:":{
-						prestamo.setBorrowState(unformatedLine);
+						prestamo.setBorrowState(line);
 						break;
 					}
 					case "dni":{
@@ -77,14 +82,16 @@ public class FileManager {
 						break;
 					}
 					default:{
-						System.out.println("Caso no contemplado: "+unformatedLine);
+						
 					}
 					
 					if(!prestamo.getDni().equals(null)) {
 						prestamo.calcAllData();
 					}
 				}
-				listaPrestamos.add(prestamo);
+				
+				
+			
 			}
 			br.close();
 			
@@ -167,3 +174,66 @@ public class FileManager {
 }
 
 
+
+/*
+ 
+  
+				
+				String unformatedLine = line.toLowerCase().replaceAll("\n", ""); //regex para eliminar todos los caracteres especiales
+				Prestamo prestamo = new Prestamo();
+				switch(unformatedLine) {
+					case "nombre":{
+						line = br.readLine();
+						unformatedLine = line.toLowerCase().replaceAll("\n", "");
+						prestamo.setName(line.replace("\n", ""));
+						break;
+					}
+					case "autor":{
+						line = br.readLine();
+						unformatedLine = line.toLowerCase().replaceAll("\n", "");
+						prestamo.setAuthor(line.replace("\n", ""));
+						break;
+					}
+					case "fecha de solicitud":{
+						Date fecha;
+						try {
+							fecha = new SimpleDateFormat("dd/MM/yyyy").parse(line.replace("\n", ""));
+							prestamo.setBorrowDate(fecha);
+							
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
+						
+						break;
+					}
+					case "fecha de entrega estipulada":{
+						Date fecha;
+						try {
+							fecha = new SimpleDateFormat("dd/MM/yyyy").parse(line.replace("\n", ""));
+							prestamo.setReturnDate(fecha);
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						break;
+					}
+					case "estado:":{
+						prestamo.setBorrowState(unformatedLine);
+						break;
+					}
+					case "dni":{
+						prestamo.setDni(unformatedLine);
+						break;
+					}
+					default:{
+						System.out.println("Caso no contemplado: "+unformatedLine);
+					}
+					
+					if(!prestamo.getDni().equals(null)) {
+						prestamo.calcAllData();
+					}
+				}
+				listaPrestamos.add(prestamo);
+  
+ */
